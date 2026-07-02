@@ -1,58 +1,25 @@
-<div class="navbar bg-base-100 shadow-sm">
-
-  <!-- Left -->
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7"/>
-        </svg>
-      </div>
-
-      <ul tabindex="0"
-          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><a>Homepage</a></li>
-        <li><a>Portfolio</a></li>
-        <li><a>About</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Center -->
-  <div class="navbar-center">
-    <a class="btn btn-ghost text-xl">DeliveryHub</a>
-  </div>
-
-  <!-- Right -->
-  <div class="navbar-end gap-2">
-
-    <button class="btn btn-ghost btn-circle">
-      <div class="indicator">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="h-5 w-5"
-             fill="none"
-             viewBox="0 0 24 24"
-             stroke="currentColor">
-          <path stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-        </svg>
-        <span class="badge badge-xs badge-primary indicator-item"></span>
-      </div>
-    </button>
-
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp">
+<nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-purple-500/20 shadow-lg shadow-purple-950/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+            <span class="text-2xl font-black tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                SAREE3
+            </span>
         </div>
-      </div>
+
+        <!-- Links -->
+        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+            <a href="#" class="hover:text-purple-400 transition">الرئيسية</a>
+            <a href="#services" class="hover:text-cyan-400 transition">بوابات النظام</a>
+            <a href="#about" class="hover:text-pink-400 transition">عن سريع3</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-4">
+            <a href="/login" class="text-sm font-medium hover:text-white text-gray-400 transition">تسجيل الدخول</a>
+            <a href="/register" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 shadow-lg shadow-purple-500/20 transition">
+                ابدأ الآن
+            </a>
+        </div>
     </div>
-
-  </div>
-
-</div>
+</nav>

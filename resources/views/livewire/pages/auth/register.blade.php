@@ -8,7 +8,7 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest') ] class extends Component
+new #[Layout('layouts.guest')] class extends Component
 {
     public string $name = '';
     public string $email = '';
@@ -17,9 +17,6 @@ new #[Layout('layouts.guest') ] class extends Component
     public string $role = '';
     public ?int $governorate_id = null;
 
-    /**
-     * Handle an incoming registration request.
-     */
     public function register(): void
     {
         $validated = $this->validate([
@@ -40,53 +37,79 @@ new #[Layout('layouts.guest') ] class extends Component
 
         Auth::login($user);
 
-        if ($user->hasRole('merchant')) {
-            $this->redirect('/merchant');
-        } elseif ($user->hasRole('employee')) {
-            $this->redirect('/employee');
-        } elseif ($user->hasRole('driver')) {
-            $this->redirect('/driver');
-        } else {
-            $this->redirect('/');
-        }
+        $this->redirect(match ($this->role) {
+            'merchant' => '/merchant',
+            'employee' => '/employee',
+            'driver' => '/driver',
+            default => '/',
+        });
     }
 }; ?>
 
 <div>
+
+    <h1 class="login-title">Register</h1>
+
+    <p class="login-subtitle">Create your DeliveryHub account</p>
+
     <form wire:submit="register">
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
+        {{-- NAME --}}
+        <div class="input-group">
+            <label>Name</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-user input-icon"></i>
+
+                <input
+                    wire:model="name"
+                    type="text"
+                    class="login-input"
+                    placeholder="Enter your name"
+                >
+            </div>
+            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
         </div>
 
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        {{-- EMAIL --}}
+        <div class="input-group">
+            <label>Email</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-envelope input-icon"></i>
+
+                <input
+                    wire:model="email"
+                    type="email"
+                    class="login-input"
+                    placeholder="Enter your email"
+                >
+            </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
-        <div class="mt-4">
-            <x-input-label for="role" :value="__('Role')" />
-            <select wire:model.live="role"
-                    id="role"
-                    class="block mt-1 w-full border-gray-300 rounded-md dark:bg-gray-900 dark:border-gray-700 text-gray-700 dark:text-gray-300 shadow-sm focus:ring-indigo-500">
-                <option value="">Choose Role</option>
-                <option value="merchant">Merchant</option>
-                <option value="employee">Employee</option>
-                <option value="driver">Driver</option>
-            </select>
+        {{-- ROLE --}}
+        <div class="input-group">
+            <label>Role</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-users input-icon"></i>
 
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                <select wire:model.live="role" class="login-input">
+                    <option value="">Choose Role</option>
+                    <option value="merchant">Merchant</option>
+                    <option value="employee">Employee</option>
+                    <option value="driver">Driver</option>
+                </select>
+            </div>
+            <x-input-error :messages="$errors->get('role')" class="mt-2"/>
         </div>
 
+        {{-- GOVERNORATE --}}
         @if($role == 'driver')
-            <div class="mt-4">
-                <x-input-label for="governorate_id" value="Governorate" />
+        <div class="input-group">
+            <label>Governorate</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-location-dot input-icon"></i>
 
-                <select wire:model="governorate_id"
-                        id="governorate_id"
-                        class="block mt-1 w-full rounded-md border-gray-300 dark:bg-gray-900 dark:border-gray-700 text-gray-700 dark:text-gray-300 shadow-sm focus:ring-indigo-500">
+                <select wire:model="governorate_id" class="login-input">
                     <option value="">Choose Governorate</option>
                     @foreach(\App\Models\Governorate::all() as $governorate)
                         <option value="{{ $governorate->id }}">
@@ -94,36 +117,50 @@ new #[Layout('layouts.guest') ] class extends Component
                         </option>
                     @endforeach
                 </select>
-
-                <x-input-error :messages="$errors->get('governorate_id')" class="mt-2" />
             </div>
+        </div>
         @endif
 
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- PASSWORD --}}
+        <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-lock input-icon"></i>
+
+                <input
+                    wire:model="password"
+                    type="password"
+                    class="login-input"
+                    placeholder="Enter your password"
+                >
+            </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        {{-- CONFIRM PASSWORD --}}
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-lock input-icon"></i>
+
+                <input
+                    wire:model="password_confirmation"
+                    type="password"
+                    class="login-input"
+                    placeholder="Confirm your password"
+                >
+            </div>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
+        {{-- BUTTON --}}
+        <button class="login-btn">
+            REGISTER
+        </button>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        {{-- SWITCH --}}
+        <div class="auth-switch">
+            <a href="{{ route('login') }}" wire:navigate>Already have an account?</a>
         </div>
+
     </form>
 </div>

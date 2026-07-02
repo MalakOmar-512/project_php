@@ -9,13 +9,12 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public LoginForm $form;
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function login(): void
     {
         $this->validate();
+
         $this->form->authenticate();
+
         Session::regenerate();
 
         $user = auth()->user();
@@ -32,50 +31,162 @@ new #[Layout('layouts.guest')] class extends Component
             $this->redirect('/');
         }
     }
-}; ?>
+};
+
+?>
 
 <div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <h1 class="login-title">
+        Login
+    </h1>
+
+    <p class="login-subtitle">
+        Sign in to continue to DeliveryHub
+    </p>
+
+    <x-auth-session-status
+        class="mb-4"
+        :status="session('status')"
+    />
 
     <form wire:submit="login">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+
+        {{-- Email --}}
+
+        <div class="input-group">
+
+            <label>Email</label>
+
+            <div class="input-wrapper">
+
+    <i class="fa-solid fa-envelope input-icon"></i>
+
+    <input
+        wire:model="form.email"
+        type="email"
+        placeholder="Enter your email"
+        class="login-input"
+        required
+    >
+
+    </div>
+
+            <x-input-error :messages="$errors->get('form.email')" class="mt-2"/>
+
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+        {{-- Password --}}
 
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-        </div>
+        <div class="input-group">
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+    <label>Password</label>
+
+    <div class="input-wrapper">
+
+        <i class="fa-solid fa-lock input-icon"></i>
+
+        <input
+            wire:model="form.password"
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            class="login-input"
+            required
+        >
+
+        <button
+            type="button"
+            class="eye-btn"
+            onclick="togglePassword()">
+
+            <i id="eyeIcon" class="fa-solid fa-eye"></i>
+
+        </button>
+
+    </div>
+
+    <x-input-error
+        :messages="$errors->get('form.password')"
+        class="mt-2"
+    />
+
+</div>
+
+
+        <div class="login-options">
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    wire:model="form.remember"
+                >
+
+                Remember me
+
             </label>
-        </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
+            @if(Route::has('password.request'))
+
+                <a href="{{ route('password.request') }}">
+
+                    Forgot Password?
+
                 </a>
+
             @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
         </div>
+
+
+        <button class="login-btn">
+
+            LOGIN
+
+        </button>
+        <div class="auth-switch">
+
+    <p>
+        Don't have an account?
+    </p>
+
+    <a href="{{ route('register') }}" wire:navigate>
+        Register
+    </a>
+
+</div>
+
     </form>
+
+</div>
+
+<script>
+
+function togglePassword(){
+
+    let input = document.getElementById('password');
+    let icon  = document.getElementById('eyeIcon');
+
+    if(input.type==="password"){
+
+        input.type="text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    }else{
+
+        input.type="password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
+
 </div>
