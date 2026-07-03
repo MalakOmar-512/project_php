@@ -27,11 +27,19 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->globalSearch(false)
+            ->brandName('DeliveryHub')
+            ->darkMode(true)
             // ->login()
            ->colors([
-                  'primary' => \Filament\Support\Colors\Color::Purple, 
-                   'gray' => \Filament\Support\Colors\Color::Slate,
-             ])
+                'primary' => Color::Hex('#facc15'),
+                'info' => Color::Hex('#06b6d4'),
+                'success' => Color::Hex('#10b981'),
+                'warning' => Color::Hex('#facc15'),
+                'danger' => Color::Hex('#d946ef'),
+                'gray' => Color::Hex('#8b5cf6'),
+            ])
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -41,8 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 \App\Filament\Widgets\OrdersStats::class,
 
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+               
             ])
             ->middleware([
                 EncryptCookies::class,

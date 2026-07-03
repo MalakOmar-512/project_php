@@ -26,9 +26,18 @@ class MerchantPanelProvider extends PanelProvider
         return $panel
             ->id('merchant')
             ->path('merchant')
+            ->globalSearch(false)
+            ->brandName('DeliveryHub')
+            ->darkMode(true)
             ->colors([
-                'primary' => Color::Orange,
+                'primary' => Color::Hex('#facc15'),
+                'info' => Color::Hex('#06b6d4'),
+                'success' => Color::Hex('#10b981'),
+                'warning' => Color::Hex('#facc15'),
+                'danger' => Color::Hex('#d946ef'),
+                'gray' => Color::Hex('#8b5cf6'),
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Merchant/Resources'), for: 'App\Filament\Merchant\Resources')
             ->discoverPages(in: app_path('Filament/Merchant/Pages'), for: 'App\Filament\Merchant\Pages')
             ->pages([
@@ -36,8 +45,8 @@ class MerchantPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Merchant/Widgets'), for: 'App\Filament\Merchant\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                // AccountWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

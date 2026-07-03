@@ -24,9 +24,19 @@ class DriverPanelProvider extends PanelProvider
         return $panel
             ->id('driver')
             ->path('driver')
+            ->globalSearch(false)
+            ->brandName('DeliveryHub')
+            ->darkMode(true)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Hex('#facc15'),
+                'info' => Color::Hex('#06b6d4'),
+                'success' => Color::Hex('#10b981'),
+                'warning' => Color::Hex('#facc15'),
+                'danger' => Color::Hex('#d946ef'),
+                'gray' => Color::Hex('#8b5cf6'),
             ])
+            
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Driver/Resources'), for: 'App\Filament\Driver\Resources')
             ->discoverPages(in: app_path('Filament/Driver/Pages'), for: 'App\Filament\Driver\Pages')
             ->pages([

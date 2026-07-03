@@ -26,9 +26,18 @@ class EmployeePanelProvider extends PanelProvider
         return $panel
             ->id('employee')
             ->path('employee')
+            ->globalSearch(false)
+            ->brandName('DeliveryHub')
+            ->darkMode(true)
             ->colors([
-                'primary' => Color::Red,
+                'primary' => Color::Hex('#facc15'),
+                'info' => Color::Hex('#06b6d4'),
+                'success' => Color::Hex('#10b981'),
+                'warning' => Color::Hex('#facc15'),
+                'danger' => Color::Hex('#d946ef'),
+                'gray' => Color::Hex('#8b5cf6'),
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Employee/Resources'), for: 'App\Filament\Employee\Resources')
             ->discoverPages(in: app_path('Filament/Employee/Pages'), for: 'App\Filament\Employee\Pages')
             ->pages([
@@ -36,8 +45,8 @@ class EmployeePanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Employee/Widgets'), for: 'App\Filament\Employee\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                // AccountWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
