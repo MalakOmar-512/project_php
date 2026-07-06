@@ -49,7 +49,6 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 \App\Filament\Widgets\OrdersStats::class,
 
-               
             ])
             ->middleware([
                 EncryptCookies::class,

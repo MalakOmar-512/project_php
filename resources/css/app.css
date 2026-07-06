@@ -11,7 +11,7 @@
         border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* الإضاءة اللي بتلف حولين الكروت والجداول */
+
     .neon-border-loop {
         position: relative;
         overflow: hidden;
@@ -76,8 +76,8 @@
 .bg-overlay{
     position:fixed;
     inset:0;
-    background:rgba(22,14,42,.65);
-    backdrop-filter:blur(4px);
+    background:rgba(11, 7, 23, 0.65);
+    backdrop-filter:blur(5px);
     z-index:-2;
 }
 
@@ -96,18 +96,18 @@
 /* Glass Card */
 
 .login-card{
-    width: 420px;
+    width: 600px;
     max-width: 90%;
 
     padding: 30px;
 
     border-radius: 28px;
 
-    background: rgba(255,255,255,.15);
+    background: rgba(255,255,255,.10);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(50px);
 
-    border: 1px solid rgba(255,255,255,.25);
+    border: 1px solid rgba(255,255,255,.15);
 
     box-shadow:
         0 15px 40px rgba(0,0,0,.35),
@@ -158,7 +158,7 @@
     left:16px;
     top:50%;
     transform:translateY(-50%);
-    color:#8b5cf6;
+    /* color:#8b5cf6; */
     font-size:17px;
 }
 .login-input{
@@ -168,14 +168,19 @@
     padding-left:48px !important;
     padding-right:45px !important;
 
-    border:none !important;
+    border:1px solid rgba(139,92,246,.4) !important;
     border-radius:12px !important;
 
-    background:rgba(255,255,255,.95)!important;
+    background: rgba(48, 28, 82, 0.9) !important;
+    color:#fff !important;
 
     font-size:15px;
-
     transition:.3s;
+}
+
+/* وتغير لون الـ placeholder عشان يبان */
+.login-input::placeholder {
+    color: #718096 !important;
 }
 .eye-btn{
     position:absolute;
@@ -223,23 +228,25 @@
 
 /* Button */
 
-.login-btn{
-    width:100%;
-    height:48px;
+.login-btn {
+    display: block; 
+    width: 140px; 
+    height: 48px;
+    margin: 0 auto; 
 
-    border:none;
-    border-radius:12px;
+    border: none;
+    border-radius: 12px;
 
-    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+    background: linear-gradient(135deg, #6943c3, #5d21be);
 
-    color:#fff;
+    color: #fff;
 
-    font-size:17px;
-    font-weight:700;
+    font-size: 17px;
+    font-weight: 700;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.3s;
+    transition: .3s;
 }
 
 .login-btn:hover{
@@ -299,4 +306,57 @@
         font-size:30px;
     }
 
+}
+.login-input:-webkit-autofill,
+.login-input:-webkit-autofill:hover,
+.login-input:-webkit-autofill:focus,
+.login-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px rgba(48, 28, 82, 0.9) inset !important;
+    -webkit-text-fill-color: #fff !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+/* ==========================================================
+   REGISTER PAGE
+========================================================== */
+
+.register-card{
+    /* هيحتفظ بنفس عرض الـ Login (420px) */
+    padding: 22px;
+}
+
+.register-card .login-title{
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+
+.register-card .login-subtitle{
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.register-card .input-group{
+    margin-bottom: 10px;
+}
+
+.register-card .input-group label{
+    font-size: 14px;
+}
+
+.register-card .login-input{
+    height: 44px;
+    font-size: 14px;
+}
+
+.register-card .login-btn{
+    height: 44px;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+.register-card .auth-switch{
+    margin-top: 14px;
+}
+
+.register-card .auth-switch a{
+    font-size: 16px;
 }

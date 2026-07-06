@@ -21,6 +21,7 @@ class OrderForm
                     ->options(
                         User::role('merchant')->pluck('name', 'id')->toArray()
                     )
+                    
                     ->searchable()
                     ->required(),
                 TextInput::make('customer_name')
@@ -34,6 +35,7 @@ class OrderForm
                     ->required()
                     ->columnSpanFull(),
                 Select::make('governorate_id')
+                    ->label('Governorate')
                     ->options(Governorate::pluck('name', 'id'))
                     ->searchable()
                     ->live()

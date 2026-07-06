@@ -28,9 +28,9 @@
 
     <div class="login-wrapper">
 
-        <div class="login-card">
+        <div class="{{ request()->routeIs('register') ? 'login-card register-card' : 'login-card' }}">
 
-            {{ $slot }}
+        {{ $slot }}
 
         </div>
 
